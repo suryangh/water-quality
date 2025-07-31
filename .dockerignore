@@ -32,8 +32,8 @@ Thumbs.db
 # Node modules (jika ada)
 node_modules/
 
-# Documentation
-README.md
+# Documentation (keep README for Docker builds)
+# README.md
 *.md
 
 # Development files
