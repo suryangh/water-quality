@@ -1,0 +1,49 @@
+# Single-stage build minimal
+FROM python:3.12-alpine
+
+# Install runtime dan build dependencies
+RUN apk add --no-cache \
+    gcc musl-dev linux-headers g++ gfortran openblas-dev cmake make \
+    libgomp libstdc++ openblas
+
+# Install dependencies dan cleanup dalam satu layer
+RUN pip install --no-cache-dir \
+    flask==3.1.1 \
+    flask-cors==3.0.10 \
+    numpy==2.0.2 \
+    joblib==1.5.1 \
+    scikit-learn==1.6.1 \
+    xgboost==2.1.4 && \
+    # Cleanup build tools
+    apk del gcc musl-dev linux-headers g++ gfortran openblas-dev cmake make && \
+    # Cleanup Python cache
+    find /usr/local -name "*.pyc" -delete && \
+    find /usr/local -name "__pycache__" -exec rm -rf {} + || true && \
+    find /usr/local -name "*.so" -exec strip {} + || true && \
+    # Cleanup pip cache
+    pip cache purge && \
+    # Cleanup apk cache
+    rm -rf /var/cache/apk/*
+
+WORKDIR /app
+
+# Copy aplikasi
+COPY backend/app.py .
+COPY backend/ml_model/ ./ml_model/
+COPY frontend/ ./frontend/
+
+# Setup user dan script
+RUN adduser -D appuser && \
+    mkdir file_uploads && \
+    echo '#!/bin/sh' > start.sh && \
+    echo 'cd /app/frontend && python serve_frontend.py &' >> start.sh && \
+    echo 'cd /app && python app.py' >> start.sh && \
+    chmod +x start.sh && \
+    chown -R appuser:appuser /app
+
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1
+
+USER appuser
+EXPOSE 5000 5500
+CMD ["./start.sh"]

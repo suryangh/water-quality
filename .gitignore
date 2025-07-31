@@ -1,0 +1,59 @@
+# Virtual Environment
+venv/
+env/
+.env/
+.venv/
+backend/dasildat/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Uploaded files
+backend/file_uploads/*
+!backend/file_uploads/.gitkeep
+
+# IDE settings
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+logs/
+log/
+
+# Environment variables
+.env
+.env.local
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Model files (optional, uncomment if you want to ignore)
+backend/ml_model/TUBES_DASILDAT.ipynb

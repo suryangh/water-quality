@@ -1,0 +1,54 @@
+# Git
+.git
+.gitignore
+
+# Virtual environment
+backend/dasildat/
+venv/
+env/
+.env
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Node modules (jika ada)
+node_modules/
+
+# Documentation
+README.md
+*.md
+
+# Development files
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Temporary files
+*.tmp
+*.temp
+
+# Upload files yang mungkin sudah ada
+file_uploads/*
+!file_uploads/.gitkeep
+
+
+#Dockerfile single stage
+Dockerfile.single
