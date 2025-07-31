@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: water-quality-config
+  namespace: water-quality
+  labels:
+    app: water-quality
+data:
+  FLASK_ENV: "production"
+  PYTHONUNBUFFERED: "1"
+  PYTHONDONTWRITEBYTECODE: "1"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: water-quality-storage
+  namespace: default
+  labels:
+    app: water-quality
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+  storageClassName: standard

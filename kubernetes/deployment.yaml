@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: water-quality-deployment
+  namespace: water-quality
+  labels:
+    app: water-quality
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: water-quality
+  template:
+    metadata:
+      labels:
+        app: water-quality
+    spec:
+      containers:
+        - name: water-quality-container
+          image: syndana/water-quality:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 5000
+              name: backend
+            - containerPort: 5500
+              name: frontend
+          env:
+            - name: PYTHONUNBUFFERED
+              value: "1"
+            - name: PYTHONDONTWRITEBYTECODE
+              value: "1"
+            - name: FLASK_ENV
+              value: "production"
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "250m"
+            limits:
+              memory: "1Gi"
+              cpu: "500m"
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 5000
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 5000
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          volumeMounts:
+            - name: file-uploads
+              mountPath: /app/file_uploads
+      volumes:
+        - name: file-uploads
+          emptyDir: {}
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000

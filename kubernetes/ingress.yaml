@@ -1,0 +1,30 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: water-quality-ingress
+  namespace: water-quality
+  labels:
+    app: water-quality
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: water-quality.synapp.my.id
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: water-quality-frontend
+                port:
+                  number: 5500
+          - path: /api
+            pathType: Prefix
+            backend:
+              service:
+                name: water-quality-backend
+                port:
+                  number: 5000
