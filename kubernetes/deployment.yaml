@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: water-quality-container
-          image: syndana/water-quality:v1.0
+          image: syndana/water-quality:v1.1
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 5000
