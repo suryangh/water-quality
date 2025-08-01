@@ -199,13 +199,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 👥 Team
 
-- **Team DASILDAT** - Data Science and Machine Learning Implementation
-
-## 🔗 Links
-
-- [Repository](https://github.com/suryangh/water-quality)
-- [Docker Hub](https://hub.docker.com/) (if published)
-- [Documentation](https://github.com/suryangh/water-quality/wiki) (if available)
+- **Team DASILDAT** -
 
 ## 📞 Support
 
@@ -216,5 +210,3 @@ If you have any questions or issues, please:
 3. Provide detailed information about your setup and the issue
 
 ---
-
-Made with ❤️ by Team DASILDAT

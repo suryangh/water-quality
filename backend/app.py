@@ -322,6 +322,16 @@ def predict():
 
 
 
+@app.route('/', methods=['GET'])
+def health_check():
+    """Health check endpoint for Kubernetes"""
+    return jsonify({
+        'status': 'healthy',
+        'service': 'water-quality-api',
+        'models_loaded': len(MODELS),
+        'scaler_loaded': SCALER is not None
+    })
+
 @app.route('/available-models', methods=['GET'])
 def get_available_models():
     return jsonify({
