@@ -339,32 +339,6 @@ def get_available_models():
         'models': list(MODELS.keys())
     })
 
-if __name__ == '__main__':
-    logging.basicConfig(
-        level=logging.INFO,
-        format='%(asctime)s - %(levelname)s - %(message)s'
-    )
-    
-    if load_models():
-        # Production configuration
-        app.run(host='0.0.0.0', port=5000, debug=False)
-    else:
-        print("Failed to load models and scaler. Please check model files exist.")
-
-@app.route('/', methods=['GET'])
-def home():
-    return jsonify({
-        'status': 'success',
-        'message': 'Water Quality Prediction API',
-        'available_endpoints': {
-            'GET /': 'This documentation',
-            'GET /available-models': 'List all available ML models',
-            'POST /predict': 'Make water quality predictions'
-        },
-        'required_parameters': required_columns,
-        'safe_ranges': SAFE_RANGES
-    })
-
 @app.route('/model-metrics', methods=['GET'])
 def get_model_metrics():
     try:
@@ -445,3 +419,15 @@ def get_model_description(model_name):
         'xgboost': 'High performance predictions'
     }
     return descriptions.get(model_name, 'General purpose')
+
+if __name__ == '__main__':
+    logging.basicConfig(
+        level=logging.INFO,
+        format='%(asctime)s - %(levelname)s - %(message)s'
+    )
+    
+    if load_models():
+        # Production configuration
+        app.run(host='0.0.0.0', port=5000, debug=False)
+    else:
+        print("Failed to load models and scaler. Please check model files exist.")

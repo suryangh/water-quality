@@ -18,13 +18,13 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: water-quality-frontend
+                name: water-quality-service
                 port:
                   number: 5500
           - path: /api
             pathType: Prefix
             backend:
               service:
-                name: water-quality-backend
+                name: water-quality-service
                 port:
                   number: 5000
