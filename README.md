@@ -40,7 +40,7 @@ cd water-quality
 docker build -t water-quality .
 
 # Run the application
-docker run -d --name water-quality-app -p 5000:5000 -p 5500:5500 water-quality
+docker run -d --name water-quality -p 5000:5000 -p 5500:5500 water-quality
 ```
 
 ### Option 2: Local Development
